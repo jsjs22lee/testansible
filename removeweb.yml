@@ -18,5 +18,8 @@
 
     - name: ubuntu > remove nginx
       action: "{{ ansible_pkg_mgr }} name=nginx state=absent"
-      action: "{{ ansible_pkg_mgr }} name=epel-release state=absent"
+      when: ansible_distribution == 'ubuntu'
+
+    - name: ubuntu > autoremove
+      action: "{{ ansible_pkg_mgr }} autoremove=yes"
       when: ansible_distribution == 'ubuntu'
